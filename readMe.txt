@@ -1,3 +1,4 @@
+le fichier "gestion_commande_lens.sql.zip" est la base de donnee à restaurer sur phpmyAdmin
 $ sudo apt-get update
 $ sudo apt-get install build-essential linux-headers-$(uname -r)
 $ sudo apt-get install virtualbox-ose-guest-x11
