@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Client{% endblock %}
+
+{% block body %}
+    <h1>Client</h1>
+    <dl class="row">
+        <dt class="col-sm-6">Id</dt>
+        <dd class="col-sm-6">{{ client.id }}</dd>
+        <dt class="col-sm-6">Nom du Client</dt>
+        <dd class="col-sm-6">{{ client.nom }}</dd>
+        <dt class="col-sm-6">Adresse du Fournisseur</dt>
+        <dd class="col-sm-6">{{ client.adresse }}</dd>
+    </dl>
+
+    {% if client.commandes %}
+        <h3>Liste des produits Commandés :</h3>
+        <ul class="list-group mb-3">
+            {% for commande in client.commandes %}
+                {% for ligneCommande in commande.ligneCommandes %}
+                    <li class="list-group-item">{{ ligneCommande.produit.libelle }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h3 class="mb-3">PAS Produits Commandés</h3>
+    {% endif %}
+
+    <a href="{{ path('client_index') }}"
+       class="btn btn-light">Retour à la liste</a>
+
+    <a href="{{ path('client_edit', {'id': client.id}) }}"
+       class="btn btn-secondary">Editer</a>
+
+    {{ include('client/_delete_form.html.twig', {'button_label': true}) }}
+{% endblock %}

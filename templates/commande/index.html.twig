@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commandes{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10">
+            <h1>Liste des Commandes</h1>
+        </div>
+        <div class="col-md-2 mt-2">
+            <a href="{{ path('commande_new') }}" class="btn btn-primary">
+                <i class="fas fa-plus-circle"></i>
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Client</th>
+            <th>Date de Commande</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td>{{ commande.id }}</td>
+                <td>{{ commande.client.nom }}</td>
+                <td>{{ commande.dateCommande |date("m/d/Y") }}</td>
+                <td>
+                    <a href="{{ path('commande_show', {'id': commande.id}) }}"
+                       class="btn btn-info">
+                        <i class="fas fa-info"></i>
+                    </a>
+                    <a href="{{ path('commande_edit', {'id': commande.id}) }}"
+                       class="btn btn-secondary">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    {{ include('commande/_delete_form.html.twig', {'button_label': false}) }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">AUCUN COMMANDE</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

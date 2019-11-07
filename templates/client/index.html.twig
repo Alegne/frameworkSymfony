@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Client {% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success mb-3">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-danger mb-3">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <div class="row">
+        <div class="col-md-10">
+            <h1>Liste des Clients</h1>
+        </div>
+        <div class="col-md-2 mt-2">
+            <a href="{{ path('client_new') }}" class="btn btn-primary">
+                <i class="fas fa-user-plus"></i>
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+            <tr>
+                <td>{{ client.id }}</td>
+                <td>{{ client.nom }}</td>
+                <td>{{ client.adresse }}</td>
+                <td>
+                    <a href="{{ path('client_show', {'id': client.id}) }}"
+                       class="btn btn-info">
+                        <i class="fas fa-user-cog"></i>
+                    </a>
+                    <a href="{{ path('client_edit', {'id': client.id}) }}"
+                       class="btn btn-secondary">
+                        <i class="fas fa-user-edit"></i>
+                    </a>
+                    {{ include('client/_delete_form.html.twig', {'button_label': false}) }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">AUCUN CLIENT</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

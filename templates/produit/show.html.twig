@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit{% endblock %}
+
+{% block body %}
+    <h1>Produit</h1>
+    <dl class="row">
+        <dt class="col-sm-6">Id</dt>
+        <dd class="col-sm-6">{{ produit.id }}</dd>
+        <dt class="col-sm-6">Designation de Produit</dt>
+        <dd class="col-sm-6">{{ produit.libelle }}</dd>
+        <dt class="col-sm-6">Stock de Produit</dt>
+        <dd class="col-sm-6">{{ produit.stock }}</dd>
+        <dt class="col-sm-6">Prix Unitaire</dt>
+        <dd class="col-sm-6">{{ produit.prixUnitaire }}</dd>
+        <dt class="col-sm-6">Categorie</dt>
+        <dd class="col-sm-6">{{ produit.categorie.libelle }}</dd>
+    </dl>
+
+    <a href="{{ path('categorie_index') }}"
+       class="btn btn-light">Retour à la liste</a>
+
+    <a href="{{ path('categorie_edit', {'id': categorie.id}) }}"
+       class="btn btn-secondary">Editer</a>
+
+    {{ include('client/_delete_form.html.twig', {'button_label': true}) }}
+{% endblock %}

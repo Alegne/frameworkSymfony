@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie{% endblock %}
+
+{% block body %}
+    <h1>Categorie</h1>
+    <dl class="row">
+        <dt class="col-sm-6">Id</dt>
+        <dd class="col-sm-6">{{ categorie.id }}</dd>
+        <dt class="col-sm-6">Designation de Categorie</dt>
+        <dd class="col-sm-6">{{ categorie.libelle }}</dd>
+    </dl>
+
+    {% if categorie.produits %}
+        <h3>Liste des produits :</h3>
+        <ul class="list-group mb-3">
+            {% for produit in categorie.produits %}
+                <li class="list-group-item">{{ produit.libelle }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h3 class="mb-3">PAS Produits</h3>
+    {% endif %}
+
+    <a href="{{ path('categorie_index') }}"
+       class="btn btn-light">Retour à la liste</a>
+
+    <a href="{{ path('categorie_edit', {'id': categorie.id}) }}"
+       class="btn btn-secondary">Editer</a>
+
+    {{ include('client/_delete_form.html.twig', {'button_label': true}) }}
+{% endblock %}

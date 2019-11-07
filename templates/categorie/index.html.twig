@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10">
+            <h1>Liste des Categories</h1>
+        </div>
+        <div class="col-md-2 mt-2">
+            <a href="{{ path('categorie_new') }}" class="btn btn-primary">
+                <i class="fas fa-plus-circle"></i>
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Libelle</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for categorie in categories %}
+            <tr>
+                <td>{{ categorie.id }}</td>
+                <td>{{ categorie.libelle }}</td>
+                <td>
+                    <a href="{{ path('categorie_show', {'id': categorie.id}) }}"
+                       class="btn btn-info">
+                        <i class="fas fa-info"></i>
+                    </a>
+                    <a href="{{ path('categorie_edit', {'id': categorie.id}) }}"
+                       class="btn btn-secondary">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    {{ include('categorie/_delete_form.html.twig', {'button_label': false}) }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">AUCUN CATEGORIE</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
